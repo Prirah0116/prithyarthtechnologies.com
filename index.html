@@ -1,0 +1,1021 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prithyarth Technologies — Networking, Hardware & IT Services</title>
+<meta name="description" content="Prithyarth Technologies delivers end-to-end IT infrastructure — networking, hardware supply, structured cabling, data center and AMC support — for businesses across India.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0A0E13;
+    --panel:#121820;
+    --panel-raised:#1A222C;
+    --border:#232D38;
+    --text:#EDF1F5;
+    --text-dim:#93A1AF;
+    --text-faint:#5C6B7A;
+    --steel:#4A8FC2;
+    --steel-dim:#2E5473;
+    --amber:#F2A93C;
+    --teal:#4FBFA0;
+    --radius:10px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Inter',sans-serif;
+    line-height:1.6;
+    overflow-x:hidden;
+    background-image:
+      linear-gradient(var(--border) 1px, transparent 1px),
+      linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size:64px 64px;
+    background-position:center top;
+    background-attachment:fixed;
+    background-color:var(--bg);
+  }
+  body::before{
+    content:"";
+    position:fixed;inset:0;
+    background:radial-gradient(ellipse 80% 50% at 50% -10%, rgba(74,143,194,0.12), transparent 60%);
+    pointer-events:none;
+    z-index:0;
+  }
+  h1,h2,h3,h4{font-family:'Space Grotesk',sans-serif;font-weight:600;letter-spacing:-0.01em;}
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:var(--steel);
+    display:flex;align-items:center;gap:10px;
+    margin-bottom:16px;
+  }
+  .eyebrow::before{content:"";width:20px;height:1px;background:var(--steel);display:inline-block;}
+  a{color:inherit;text-decoration:none;}
+  .container{max-width:1180px;margin:0 auto;padding:0 32px;}
+  section{position:relative;z-index:1;}
+
+  /* NAV */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(10,14,19,0.85);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--border);
+  }
+  nav{
+    max-width:1180px;margin:0 auto;padding:18px 32px;
+    display:flex;align-items:center;justify-content:space-between;
+  }
+  .logo{
+    display:flex;align-items:center;gap:10px;
+    font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:19px;
+    color:var(--text);
+  }
+  .logo-mark{
+    width:34px;height:34px;border-radius:6px;
+    background:linear-gradient(135deg, var(--steel), var(--teal));
+    display:flex;align-items:center;justify-content:center;
+    font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:14px;color:#081016;
+    flex-shrink:0;
+  }
+  .logo small{display:block;font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:400;letter-spacing:0.08em;color:var(--text-faint);text-transform:uppercase;margin-top:2px;}
+  .nav-links{display:flex;gap:36px;align-items:center;}
+  .nav-links a{font-size:14.5px;color:var(--text-dim);transition:color .2s;}
+  .nav-links a:hover{color:var(--text);}
+  .btn{
+    font-family:'Inter',sans-serif;font-weight:600;font-size:14.5px;
+    padding:11px 22px;border-radius:7px;
+    display:inline-flex;align-items:center;gap:8px;
+    transition:all .2s;cursor:pointer;border:none;
+  }
+  .btn-primary{background:var(--amber);color:#1A1000;}
+  .btn-primary:hover{background:#ffb84d;transform:translateY(-1px);}
+  .btn-ghost{border:1px solid var(--border);color:var(--text);background:transparent;}
+  .btn-ghost:hover{border-color:var(--steel);}
+  .nav-cta{display:flex;gap:12px;}
+  .nav-toggle{display:none;background:none;border:none;color:var(--text);font-size:24px;cursor:pointer;}
+
+  /* HERO */
+  .hero{padding:100px 0 80px;}
+  .hero-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:60px;align-items:center;}
+  .hero h1{font-size:52px;line-height:1.08;margin-bottom:22px;}
+  .hero h1 span{color:var(--steel);}
+  .hero p.lead{font-size:17px;color:var(--text-dim);max-width:480px;margin-bottom:32px;}
+  .hero-ctas{display:flex;gap:14px;margin-bottom:44px;flex-wrap:wrap;}
+  .hero-stats{display:flex;gap:36px;flex-wrap:wrap;}
+  .stat b{display:block;font-family:'Space Grotesk',sans-serif;font-size:26px;color:var(--text);}
+  .stat span{font-size:12.5px;color:var(--text-faint);font-family:'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:0.06em;}
+
+  /* NETWORK DIAGRAM SIGNATURE */
+  .diagram-wrap{
+    position:relative;
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:16px;
+    padding:20px;
+    aspect-ratio:1/1;
+  }
+  .diagram-wrap .tag{
+    position:absolute;top:16px;left:20px;
+    font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--text-faint);
+    letter-spacing:0.05em;
+  }
+  .diagram-wrap svg{width:100%;height:100%;}
+  .net-line{
+    stroke:var(--steel-dim);
+    stroke-width:1.5;
+    fill:none;
+    stroke-dasharray:6 5;
+  }
+  .net-line.active{
+    stroke:var(--steel);
+    stroke-dasharray:400;
+    stroke-dashoffset:400;
+    animation:drawline 2.4s ease forwards infinite;
+  }
+  .net-line.active.d1{animation-delay:0s;}
+  .net-line.active.d2{animation-delay:.3s;}
+  .net-line.active.d3{animation-delay:.6s;}
+  .net-line.active.d4{animation-delay:.9s;}
+  @keyframes drawline{
+    0%{stroke-dashoffset:400;opacity:0;}
+    15%{opacity:1;}
+    60%{stroke-dashoffset:0;opacity:1;}
+    100%{stroke-dashoffset:0;opacity:0;}
+  }
+  .node-circle{fill:var(--panel-raised);stroke:var(--border);stroke-width:1.5;}
+  .node-circle.hub{stroke:var(--amber);}
+  .node-label{font-family:'IBM Plex Mono',monospace;font-size:9.5px;fill:var(--text-dim);text-anchor:middle;}
+  .pulse{
+    fill:var(--teal);
+    animation:pulse 2.2s ease-in-out infinite;
+  }
+  @keyframes pulse{
+    0%,100%{opacity:.3;r:3;}
+    50%{opacity:1;r:5;}
+  }
+
+  /* TRUST BAR */
+  .trust{border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:28px 0;background:var(--panel);}
+  .trust .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;}
+  .trust-item{font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:var(--text-faint);letter-spacing:0.04em;}
+  .trust-item b{color:var(--text-dim);font-weight:500;}
+
+  /* SECTION HEADS */
+  .section-head{max-width:640px;margin-bottom:56px;}
+  .section-head h2{font-size:34px;margin-bottom:14px;}
+  .section-head p{color:var(--text-dim);font-size:15.5px;}
+  .section-pad{padding:100px 0;}
+
+  /* SERVICES */
+  .services-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:14px;overflow:hidden;}
+  .service-card{background:var(--panel);padding:32px 26px;transition:background .2s;cursor:pointer;position:relative;}
+  .service-card:hover{background:var(--panel-raised);}
+  .service-card:hover .service-open{color:var(--amber);}
+  .service-open{
+    display:flex;align-items:center;gap:6px;margin-top:16px;
+    font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--steel);letter-spacing:0.04em;
+    transition:color .2s;
+  }
+
+  /* CATALOG MODAL */
+  .catalog-overlay{
+    display:none;position:fixed;inset:0;z-index:200;
+    background:rgba(5,7,10,0.82);backdrop-filter:blur(4px);
+    padding:26px 16px;overflow-y:auto;
+  }
+  .catalog-overlay.open{display:block;}
+  .catalog-modal{
+    max-width:1080px;margin:0 auto;background:var(--panel);border:1px solid var(--border);
+    border-radius:16px;overflow:hidden;
+    animation:modalIn .25s ease;
+  }
+  @keyframes modalIn{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+  .catalog-head{
+    padding:26px 30px;border-bottom:1px solid var(--border);
+    display:flex;justify-content:space-between;align-items:flex-start;gap:20px;
+    position:sticky;top:0;background:var(--panel);z-index:2;
+  }
+  .catalog-head h3{font-size:22px;margin-bottom:6px;}
+  .catalog-head p{font-size:13px;color:var(--text-dim);max-width:640px;}
+  .catalog-close{
+    background:var(--panel-raised);border:1px solid var(--border);color:var(--text-dim);
+    width:34px;height:34px;border-radius:8px;flex-shrink:0;font-size:18px;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;transition:all .2s;
+  }
+  .catalog-close:hover{color:var(--text);border-color:var(--steel);}
+  .catalog-tabs{
+    display:flex;gap:8px;flex-wrap:wrap;padding:18px 30px 0;
+  }
+  .catalog-tab{
+    font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:0.03em;
+    padding:8px 14px;border-radius:999px;border:1px solid var(--border);color:var(--text-dim);
+    cursor:pointer;transition:all .2s;background:transparent;
+  }
+  .catalog-tab.active{background:var(--steel);border-color:var(--steel);color:#081016;font-weight:600;}
+  .catalog-tab:hover:not(.active){border-color:var(--steel);color:var(--text);}
+  .catalog-body{padding:24px 30px 30px;}
+  .catalog-grid{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:16px;
+  }
+  .catalog-item{
+    background:var(--panel-raised);border:1px solid var(--border);border-radius:12px;
+    padding:18px;display:flex;flex-direction:column;gap:10px;
+  }
+  .catalog-item .brand-tag{
+    font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.06em;text-transform:uppercase;
+    color:var(--teal);
+  }
+  .catalog-item h4{font-size:14.5px;line-height:1.35;}
+  .catalog-item .specs{font-size:12px;color:var(--text-dim);line-height:1.55;flex-grow:1;}
+  .catalog-item .price-row{
+    display:flex;justify-content:space-between;align-items:baseline;
+    padding-top:10px;border-top:1px solid var(--border);
+  }
+  .catalog-item .price{font-family:'Space Grotesk',sans-serif;font-size:17px;color:var(--amber);}
+  .catalog-item .price small{font-family:'Inter',sans-serif;font-size:10.5px;color:var(--text-faint);font-weight:400;}
+  .catalog-buy{
+    font-family:'Inter',sans-serif;font-weight:600;font-size:12.5px;
+    padding:9px 12px;border-radius:6px;text-align:center;
+    background:var(--amber);color:#1A1000;cursor:pointer;border:none;transition:all .2s;
+  }
+  .catalog-buy:hover{background:#ffb84d;}
+  .catalog-note{
+    margin-top:22px;padding:14px 16px;border:1px solid var(--border);border-radius:10px;
+    font-size:12px;color:var(--text-faint);background:var(--panel);line-height:1.6;
+  }
+  @media (max-width:900px){
+    .catalog-grid{grid-template-columns:1fr 1fr;}
+  }
+  @media (max-width:600px){
+    .catalog-grid{grid-template-columns:1fr;}
+    .catalog-head,.catalog-tabs,.catalog-body{padding-left:18px;padding-right:18px;}
+  }
+  .service-icon{
+    width:42px;height:42px;border-radius:8px;
+    background:var(--panel-raised);border:1px solid var(--border);
+    display:flex;align-items:center;justify-content:center;
+    margin-bottom:20px;color:var(--steel);
+  }
+  .service-card h3{font-size:16.5px;margin-bottom:10px;}
+  .service-card p{font-size:13.5px;color:var(--text-dim);}
+  .service-tag{
+    display:inline-block;margin-top:14px;
+    font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--text-faint);
+    border:1px solid var(--border);padding:3px 8px;border-radius:4px;
+  }
+
+  /* PROCESS */
+  .process{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;position:relative;}
+  .process::before{
+    content:"";position:absolute;top:26px;left:8%;right:8%;height:1px;
+    background:repeating-linear-gradient(90deg, var(--border) 0 8px, transparent 8px 14px);
+    z-index:0;
+  }
+  .process-step{position:relative;z-index:1;}
+  .process-num{
+    width:52px;height:52px;border-radius:50%;
+    background:var(--panel);border:1.5px solid var(--steel);
+    display:flex;align-items:center;justify-content:center;
+    font-family:'IBM Plex Mono',monospace;color:var(--steel);font-size:15px;
+    margin-bottom:20px;
+  }
+  .process-step h4{font-size:17px;margin-bottom:8px;}
+  .process-step p{font-size:13.5px;color:var(--text-dim);}
+
+  /* WHY US */
+  .why-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;}
+  .why-list{display:flex;flex-direction:column;gap:26px;}
+  .why-item{display:flex;gap:18px;}
+  .why-item .num{font-family:'IBM Plex Mono',monospace;color:var(--amber);font-size:13px;flex-shrink:0;padding-top:3px;}
+  .why-item h4{font-size:16px;margin-bottom:6px;}
+  .why-item p{font-size:13.5px;color:var(--text-dim);}
+  .why-panel{
+    background:var(--panel);border:1px solid var(--border);border-radius:14px;
+    padding:36px;
+  }
+  .why-panel .metric{display:flex;justify-content:space-between;align-items:baseline;padding:16px 0;border-bottom:1px solid var(--border);}
+  .why-panel .metric:last-child{border-bottom:none;}
+  .why-panel .metric b{font-family:'Space Grotesk',sans-serif;font-size:22px;}
+  .why-panel .metric span{font-size:12.5px;color:var(--text-faint);font-family:'IBM Plex Mono',monospace;}
+
+  /* TESTIMONIAL */
+  .testimonial-strip{background:var(--panel);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+  .testimonial-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);}
+  .t-card{background:var(--panel);padding:38px 32px;}
+  .t-card p{font-size:14.5px;color:var(--text-dim);margin-bottom:20px;font-style:italic;}
+  .t-who{font-size:13px;color:var(--text);font-weight:600;}
+  .t-role{font-size:12px;color:var(--text-faint);font-family:'IBM Plex Mono',monospace;}
+
+  /* CONTACT */
+  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;}
+  .contact-info-item{margin-bottom:28px;}
+  .contact-info-item .eyebrow{margin-bottom:8px;}
+  .contact-info-item p{font-size:15px;color:var(--text);}
+  .contact-info-item span{font-size:13px;color:var(--text-faint);}
+  form{display:flex;flex-direction:column;gap:16px;}
+  .form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  input,textarea,select{
+    background:var(--panel);border:1px solid var(--border);border-radius:7px;
+    padding:13px 14px;color:var(--text);font-family:'Inter',sans-serif;font-size:14px;
+    width:100%;
+  }
+  input:focus,textarea:focus,select:focus{outline:2px solid var(--steel);outline-offset:1px;}
+  textarea{resize:vertical;min-height:100px;}
+  label{font-size:12.5px;color:var(--text-faint);font-family:'IBM Plex Mono',monospace;margin-bottom:6px;display:block;}
+
+  /* FOOTER */
+  footer{border-top:1px solid var(--border);padding:56px 0 28px;}
+  .footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px;margin-bottom:48px;}
+  .footer-col h5{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-faint);margin-bottom:18px;}
+  .footer-col a{display:block;font-size:14px;color:var(--text-dim);margin-bottom:12px;transition:color .2s;}
+  .footer-col a:hover{color:var(--steel);}
+  .footer-bottom{border-top:1px solid var(--border);padding-top:24px;display:flex;justify-content:space-between;color:var(--text-faint);font-size:12.5px;font-family:'IBM Plex Mono',monospace;flex-wrap:wrap;gap:10px;}
+
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease, transform .6s ease;}
+  .reveal.visible{opacity:1;transform:translateY(0);}
+
+  @media (max-width:900px){
+    .hero-grid,.why-grid,.contact-grid{grid-template-columns:1fr;}
+    .services-grid{grid-template-columns:repeat(2,1fr);}
+    .testimonial-grid{grid-template-columns:1fr;}
+    .process{grid-template-columns:1fr 1fr;row-gap:36px;}
+    .process::before{display:none;}
+    .footer-grid{grid-template-columns:1fr 1fr;}
+    .nav-links{position:fixed;top:70px;left:0;right:0;background:var(--bg);border-bottom:1px solid var(--border);flex-direction:column;padding:24px 32px;gap:20px;display:none;}
+    .nav-links.open{display:flex;}
+    .nav-toggle{display:block;}
+    .nav-cta{display:none;}
+    .hero h1{font-size:36px;}
+  }
+  @media (max-width:600px){
+    .services-grid{grid-template-columns:1fr;}
+    .process{grid-template-columns:1fr;}
+    .form-row{grid-template-columns:1fr;}
+    .footer-grid{grid-template-columns:1fr;}
+    .hero-stats{gap:24px;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .net-line.active{animation:none;stroke-dasharray:none;opacity:1;}
+    .pulse{animation:none;}
+    .reveal{transition:none;opacity:1;transform:none;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <div class="logo">
+      <div class="logo-mark">PT</div>
+      <div>Prithyarth Technologies<small>IT Infrastructure &amp; Services</small></div>
+    </div>
+    <div class="nav-links" id="navLinks">
+      <a href="#services">Services</a>
+      <a href="#process">How We Work</a>
+      <a href="#why">Why Us</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="nav-cta">
+      <a href="tel:+917780978023" class="btn btn-ghost">Call Us</a>
+      <a href="#contact" class="btn btn-primary">Get a Quote</a>
+    </div>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">☰</button>
+  </nav>
+</header>
+
+<div class="catalog-overlay" id="catalogOverlay" onclick="if(event.target===this)closeCatalog()">
+  <div class="catalog-modal">
+    <div class="catalog-head">
+      <div>
+        <h3 id="catalogTitle">Category</h3>
+        <p id="catalogDesc">Description</p>
+      </div>
+      <button class="catalog-close" onclick="closeCatalog()" aria-label="Close">✕</button>
+    </div>
+    <div class="catalog-tabs" id="catalogTabs"></div>
+    <div class="catalog-body">
+      <div class="catalog-grid" id="catalogGrid"></div>
+      <div class="catalog-note">Prices are indicative MRP/street pricing in INR (exclusive of GST unless noted) compiled from official brand websites and authorized channel listings as of July 2026, for planning purposes only. Final quotation depends on configuration, current distributor pricing, and quantity — click "Enquire to Purchase" on any item and we'll send a formal quote within one business day.</div>
+    </div>
+  </div>
+</div>
+
+<section class="hero">
+  <div class="container hero-grid">
+    <div>
+      <div class="eyebrow">IT Equipment &amp; Managed Services</div>
+      <h1>Networking to hardware —<br><span>every IT layer</span>, one partner.</h1>
+      <p class="lead">Prithyarth Technologies designs, supplies, and supports the infrastructure that keeps businesses running: structured networks, servers and hardware, data centers, and on-call technical support — under one roof.</p>
+      <div class="hero-ctas">
+        <a href="#contact" class="btn btn-primary">Request a Site Assessment</a>
+        <a href="#services" class="btn btn-ghost">View Services</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><b>250+</b><span>Deployments Delivered</span></div>
+        <div class="stat"><b>40+</b><span>Enterprise Clients</span></div>
+        <div class="stat"><b>24/7</b><span>Support Desk</span></div>
+        <div class="stat"><b>PAN India</b><span>Service Coverage</span></div>
+      </div>
+    </div>
+    <div class="diagram-wrap reveal" id="diagramWrap">
+      <span class="tag">// live-network-map.svg</span>
+      <svg viewBox="0 0 400 400">
+        <!-- lines -->
+        <path class="net-line active d1" d="M200,90 L120,180"/>
+        <path class="net-line active d2" d="M200,90 L280,180"/>
+        <path class="net-line active d3" d="M120,180 L90,280"/>
+        <path class="net-line active d4" d="M120,180 L160,290"/>
+        <path class="net-line active d1" d="M280,180 L250,290"/>
+        <path class="net-line active d2" d="M280,180 L320,280"/>
+        <path class="net-line active d3" d="M200,90 L200,40"/>
+
+        <!-- cloud node -->
+        <circle class="node-circle hub" cx="200" cy="40" r="22"/>
+        <text class="node-label" x="200" y="44">CLOUD</text>
+
+        <!-- core node -->
+        <circle class="node-circle hub" cx="200" cy="90" r="26"/>
+        <text class="node-label" x="200" y="94">CORE</text>
+
+        <!-- switches -->
+        <circle class="node-circle" cx="120" cy="180" r="20"/>
+        <text class="node-label" x="120" y="184">SW-1</text>
+        <circle class="node-circle" cx="280" cy="180" r="20"/>
+        <text class="node-label" x="280" y="184">SW-2</text>
+
+        <!-- endpoints -->
+        <circle class="node-circle" cx="90" cy="280" r="15"/>
+        <text class="node-label" x="90" y="283">SRV</text>
+        <circle class="node-circle" cx="160" cy="290" r="15"/>
+        <text class="node-label" x="160" y="293">PC</text>
+        <circle class="node-circle" cx="250" cy="290" r="15"/>
+        <text class="node-label" x="250" y="293">NVR</text>
+        <circle class="node-circle" cx="320" cy="280" r="15"/>
+        <text class="node-label" x="320" y="283">AP</text>
+
+        <!-- pulses -->
+        <circle class="pulse" cx="200" cy="90" r="3"/>
+        <circle class="pulse" cx="120" cy="180" r="3" style="animation-delay:.5s"/>
+        <circle class="pulse" cx="280" cy="180" r="3" style="animation-delay:1s"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<div class="trust">
+  <div class="container">
+    <div class="trust-item"><b>Authorized reseller</b> — Cisco · HPE · Dell · APC</div>
+    <div class="trust-item"><b>ISO-aligned</b> service delivery process</div>
+    <div class="trust-item"><b>GST-registered</b> · corporate billing supported</div>
+    <div class="trust-item"><b>SLA-backed</b> AMC &amp; support contracts</div>
+  </div>
+</div>
+
+<section class="section-pad" id="services">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow">What We Do</div>
+      <h2>Full-stack IT services, not just a piece of it</h2>
+      <p>Most vendors sell hardware or manage networks. We do both — plus everything that connects them — so you deal with one accountable partner instead of five.</p>
+    </div>
+    <div class="services-grid reveal">
+      <div class="service-card" onclick="openCatalog('networking')">
+        <div class="service-icon">◈</div>
+        <h3>Networking</h3>
+        <p>LAN/WAN design, routers, switches, firewalls, Wi-Fi rollouts and network security for offices of any size.</p>
+        <span class="service-tag">NET</span>
+        <div class="service-open">View inventory &amp; prices →</div>
+      </div>
+      <div class="service-card" onclick="openCatalog('hardware')">
+        <div class="service-icon">▣</div>
+        <h3>Hardware Supply</h3>
+        <p>Servers, workstations, laptops, storage arrays and peripherals — sourced, configured, and delivered.</p>
+        <span class="service-tag">HW</span>
+        <div class="service-open">View inventory &amp; prices →</div>
+      </div>
+      <div class="service-card" onclick="openCatalog('cabling')">
+        <div class="service-icon">▤</div>
+        <h3>Structured Cabling</h3>
+        <p>Cat6/6A and fiber cabling, patch panels, and rack setups built to certified industry standards.</p>
+        <span class="service-tag">CBL</span>
+        <div class="service-open">View inventory &amp; prices →</div>
+      </div>
+      <div class="service-card" onclick="openCatalog('datacenter')">
+        <div class="service-icon">◫</div>
+        <h3>Data Center &amp; Cloud</h3>
+        <p>Server room design, virtualization, backup &amp; disaster recovery, and hybrid cloud migration.</p>
+        <span class="service-tag">DC</span>
+        <div class="service-open">View inventory &amp; prices →</div>
+      </div>
+      <div class="service-card" onclick="openCatalog('surveillance')">
+        <div class="service-icon">◉</div>
+        <h3>Surveillance &amp; Security</h3>
+        <p>CCTV, access control, and NVR/DVR systems integrated with your existing network infrastructure.</p>
+        <span class="service-tag">SEC</span>
+        <div class="service-open">View inventory &amp; prices →</div>
+      </div>
+      <div class="service-card" onclick="openCatalog('amc')">
+        <div class="service-icon">⟲</div>
+        <h3>AMC &amp; Support</h3>
+        <p>Annual maintenance contracts with defined SLAs, remote monitoring, and on-site engineer visits.</p>
+        <span class="service-tag">AMC</span>
+        <div class="service-open">View AMC plans →</div>
+      </div>
+      <div class="service-card" onclick="openCatalog('procurement')">
+        <div class="service-icon">▥</div>
+        <h3>IT Procurement</h3>
+        <p>Bulk hardware and licensing procurement with vendor coordination and warranty management.</p>
+        <span class="service-tag">PRC</span>
+        <div class="service-open">View inventory &amp; prices →</div>
+      </div>
+      <div class="service-card" onclick="openCatalog('staffing')">
+        <div class="service-icon">◎</div>
+        <h3>On-Site Staffing</h3>
+        <p>Deployed IT engineers and helpdesk staff for organizations that need hands on the ground daily.</p>
+        <span class="service-tag">STF</span>
+        <div class="service-open">View plans &amp; rates →</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-pad" id="process" style="padding-top:0;">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow">Engagement Process</div>
+      <h2>How a project runs, start to finish</h2>
+      <p>The same four-stage process for a single server room or a multi-branch rollout.</p>
+    </div>
+    <div class="process reveal">
+      <div class="process-step">
+        <div class="process-num">01</div>
+        <h4>Assess</h4>
+        <p>Site survey, current infrastructure audit, and requirement mapping against your budget and timeline.</p>
+      </div>
+      <div class="process-step">
+        <div class="process-num">02</div>
+        <h4>Design</h4>
+        <p>Network topology, hardware BOM, and rollout plan — reviewed and signed off before procurement begins.</p>
+      </div>
+      <div class="process-step">
+        <div class="process-num">03</div>
+        <h4>Deploy</h4>
+        <p>Installation, cabling, configuration, and testing carried out by certified engineers on your schedule.</p>
+      </div>
+      <div class="process-step">
+        <div class="process-num">04</div>
+        <h4>Support</h4>
+        <p>Handover documentation, staff training, and ongoing AMC support with defined response SLAs.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-pad" id="why">
+  <div class="container why-grid">
+    <div class="reveal">
+      <div class="eyebrow">Why Prithyarth</div>
+      <h2 style="font-size:32px;margin-bottom:32px;">Built for businesses that can't afford IT downtime</h2>
+      <div class="why-list">
+        <div class="why-item">
+          <div class="num">→</div>
+          <div><h4>Single point of accountability</h4><p>One contract, one support number, for hardware, network, and maintenance — no finger-pointing between vendors.</p></div>
+        </div>
+        <div class="why-item">
+          <div class="num">→</div>
+          <div><h4>Certified engineering team</h4><p>Vendor-certified technicians for Cisco, HPE, Dell and major firewall and surveillance platforms.</p></div>
+        </div>
+        <div class="why-item">
+          <div class="num">→</div>
+          <div><h4>Transparent SLAs</h4><p>Defined response and resolution times in every AMC — tracked and reported, not just promised.</p></div>
+        </div>
+        <div class="why-item">
+          <div class="num">→</div>
+          <div><h4>Scales with you</h4><p>From a single branch office to a multi-site rollout, the same process and team scale with your growth.</p></div>
+        </div>
+      </div>
+    </div>
+    <div class="why-panel reveal">
+      <div class="metric"><span>Avg. incident response</span><b>&lt; 4 hrs</b></div>
+      <div class="metric"><span>Client retention rate</span><b>92%</b></div>
+      <div class="metric"><span>Certified engineers on staff</span><b>18</b></div>
+      <div class="metric"><span>Cities with active AMC clients</span><b>12+</b></div>
+      <div class="metric"><span>Years in IT infrastructure</span><b>10+</b></div>
+    </div>
+  </div>
+</section>
+
+<div class="testimonial-strip">
+  <div class="testimonial-grid">
+    <div class="t-card reveal">
+      <p>"They rewired our entire office network over a weekend with zero disruption on Monday. Documentation was better than what our last three vendors combined gave us."</p>
+      <div class="t-who">Facilities Head</div>
+      <div class="t-role">Manufacturing Firm, Jammu</div>
+    </div>
+    <div class="t-card reveal">
+      <p>"Our AMC response time actually matches what's in the contract. That alone made switching worth it."</p>
+      <div class="t-who">IT Manager</div>
+      <div class="t-role">Regional Bank Branch Network</div>
+    </div>
+    <div class="t-card reveal">
+      <p>"From server procurement to rack installation, they handled vendor coordination we used to do ourselves."</p>
+      <div class="t-who">Operations Director</div>
+      <div class="t-role">Logistics Company</div>
+    </div>
+  </div>
+</div>
+
+<section class="section-pad" id="contact">
+  <div class="container contact-grid">
+    <div class="reveal">
+      <div class="eyebrow">Get In Touch</div>
+      <h2 style="font-size:32px;margin-bottom:28px;">Request a site assessment</h2>
+      <div class="contact-info-item">
+        <div class="eyebrow" style="margin-bottom:4px;">Phone</div>
+        <p>+91 7780978023</p>
+        <span>Mon–Sat, 9:30 AM – 6:30 PM IST</span>
+      </div>
+      <div class="contact-info-item">
+        <div class="eyebrow" style="margin-bottom:4px;">Email</div>
+        <p>Prithyarthenterprises@gmail.com</p>
+        <span>Response within one business day</span>
+      </div>
+      <div class="contact-info-item">
+        <div class="eyebrow" style="margin-bottom:4px;">Office</div>
+        <p>Jammu, Jammu &amp; Kashmir, India</p>
+        <span>On-site visits across Jammu &amp; Kashmir and PAN India by arrangement</span>
+      </div>
+    </div>
+    <form class="reveal" action="https://formsubmit.co/Prithyarthenterprises@gmail.com" method="POST">
+      <input type="hidden" name="_subject" value="New enquiry — Prithyarth Technologies website">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_template" value="table">
+      <input type="text" name="_honey" style="display:none">
+      <div class="form-row">
+        <div>
+          <label for="fname">Full Name</label>
+          <input id="fname" name="Full Name" type="text" placeholder="Your name" required>
+        </div>
+        <div>
+          <label for="company">Company</label>
+          <input id="company" name="Company" type="text" placeholder="Company name">
+        </div>
+      </div>
+      <div class="form-row">
+        <div>
+          <label for="phone">Phone</label>
+          <input id="phone" name="Phone" type="tel" placeholder="+91" required>
+        </div>
+        <div>
+          <label for="email">Email</label>
+          <input id="email" name="Email" type="email" placeholder="you@company.com" required>
+        </div>
+      </div>
+      <div>
+        <label for="service">Service Required</label>
+        <select id="service" name="Service Required">
+          <option>Networking</option>
+          <option>Hardware Supply</option>
+          <option>Structured Cabling</option>
+          <option>Data Center &amp; Cloud</option>
+          <option>Surveillance &amp; Security</option>
+          <option>AMC &amp; Support</option>
+          <option>Something else</option>
+        </select>
+      </div>
+      <div>
+        <label for="msg">Project Details</label>
+        <textarea id="msg" name="Project Details" placeholder="Tell us about your site, timeline, and requirements"></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary" style="justify-content:center;">Send Request</button>
+      <p style="color:var(--text-faint);font-size:12.5px;">Submissions are emailed directly to Prithyarthenterprises@gmail.com.</p>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <div class="logo" style="margin-bottom:14px;">
+          <div class="logo-mark">PT</div>
+          <div>Prithyarth Technologies</div>
+        </div>
+        <p style="font-size:13.5px;color:var(--text-dim);max-width:280px;">End-to-end IT equipment and services — networking to hardware — for businesses that need infrastructure they can rely on.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Services</h5>
+        <a href="#services">Networking</a>
+        <a href="#services">Hardware Supply</a>
+        <a href="#services">Structured Cabling</a>
+        <a href="#services">Data Center &amp; Cloud</a>
+      </div>
+      <div class="footer-col">
+        <h5>Company</h5>
+        <a href="#why">Why Us</a>
+        <a href="#process">Our Process</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h5>Contact</h5>
+        <a href="tel:+917780978023">+91 7780978023</a>
+        <a href="mailto:Prithyarthenterprises@gmail.com">Prithyarthenterprises@gmail.com</a>
+        <a href="#">Jammu, J&amp;K, India</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Prithyarth Technologies. All rights reserved.</span>
+      <span>Built for networking to hardware.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  navToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); } });
+  }, {threshold:0.15});
+  revealEls.forEach(el => io.observe(el));
+</script>
+
+<script>
+/* ============================================================
+   CATALOG / INVENTORY DATA
+   Indicative INR pricing compiled from official Dell/HP/Lenovo/
+   Hikvision/CP Plus websites & authorized channel listings, July 2026.
+   ============================================================ */
+const CATALOG = {
+  networking: {
+    title: "Networking — Inventory & Price List",
+    desc: "Routers, switches, firewalls and Wi-Fi access points we regularly supply and deploy. Enterprise pricing depends on licensing tier — request a formal BOM quote.",
+    serviceValue: "Networking",
+    groups: [
+      { name:"Routers & Firewalls", items:[
+        {brand:"Cisco", name:"ISR 1100 4-Port Gigabit Router", specs:"4x GbE, dual-WAN, SD-WAN ready", price:"₹58,000"},
+        {brand:"Cisco", name:"Meraki MX67 Security Appliance", specs:"Firewall + SD-WAN, cloud-managed (license extra)", price:"₹85,000"},
+        {brand:"Fortinet", name:"FortiGate 40F Firewall", specs:"UTM, 5x GbE ports, compact desktop, 1-yr bundle", price:"₹48,000"},
+        {brand:"Fortinet", name:"FortiGate 60F Firewall", specs:"UTM, 10x GbE ports, 1-yr bundle", price:"₹95,000"},
+        {brand:"Fortinet", name:"FortiGate 100F Firewall", specs:"NGFW, 22x GbE ports incl. SFP, high-density branch", price:"₹2,45,000"},
+        {brand:"Fortinet", name:"FortiGate 700G Firewall", specs:"Latest-gen NGFW, 10x 10GbE + 2x 25GbE SFP28, high-throughput core", price:"₹6,80,000"},
+        {brand:"TP-Link", name:"ER7206 Omada Gigabit VPN Router", specs:"SPI firewall, load balancing, 5x GbE", price:"₹9,500"},
+      ]},
+      { name:"Switches", items:[
+        {brand:"Cisco", name:"Catalyst 1300 24-Port PoE+ Switch", specs:"24x GbE PoE+, 4x SFP+ uplinks", price:"₹1,45,000"},
+        {brand:"HPE Aruba", name:"Instant On 1930 24G Switch", specs:"24x GbE, 4x SFP+, smart-managed", price:"₹78,000"},
+        {brand:"Fortinet", name:"FortiSwitch 224E-POE", specs:"24x GbE PoE+, 4x SFP+, FortiLink managed", price:"₹1,15,000"},
+        {brand:"Fortinet", name:"FortiSwitch 648E", specs:"Latest 600 Series, 48x GbE PoE+, 4x 10GbE SFP+ uplinks", price:"₹1,95,000"},
+        {brand:"TP-Link", name:"TL-SG1024 24-Port Gigabit Switch", specs:"Unmanaged, desktop/rackmount", price:"₹9,900"},
+        {brand:"D-Link", name:"DGS-1100-16 16-Port Smart Switch", specs:"16x GbE, web-smart managed", price:"₹7,200"},
+      ]},
+      { name:"Wi-Fi Access Points", items:[
+        {brand:"Cisco Meraki", name:"MR36 Wi-Fi 6 Access Point", specs:"Cloud-managed, dual-band Wi-Fi 6", price:"₹42,000"},
+        {brand:"HPE Aruba", name:"Instant On AP22", specs:"Wi-Fi 6, 2x2 MIMO, PoE powered", price:"₹18,500"},
+        {brand:"Fortinet", name:"FortiAP 231F", specs:"Wi-Fi 6, 2x2 MIMO, FortiGate/FortiLAN Cloud managed", price:"₹22,500"},
+        {brand:"Fortinet", name:"FortiAP 231K", specs:"Latest Wi-Fi 7 (802.11be), 4x4 MIMO, cloud/controller managed", price:"₹38,000"},
+        {brand:"Ubiquiti", name:"UniFi U6-Lite Access Point", specs:"Wi-Fi 6, controller-managed", price:"₹9,500"},
+        {brand:"TP-Link", name:"EAP670 Wi-Fi 6 Access Point", specs:"AX5400, PoE+ powered, Omada SDN", price:"₹14,500"},
+      ]},
+    ]
+  },
+  hardware: {
+    title: "Hardware Supply — Laptops & Desktops",
+    desc: "Latest Dell, Lenovo and HP models we source, configure and deliver with standard OEM warranty. Bulk/corporate pricing available on request.",
+    serviceValue: "Hardware Supply",
+    groups: [
+      { name:"Dell Laptops", items:[
+        {brand:"Dell", name:"Inspiron 15", specs:"13th Gen Core i5, 16GB RAM, 512GB SSD, Win 11", price:"₹54,990"},
+        {brand:"Dell", name:"Vostro 15 3530", specs:"13th Gen Core i5, 16GB RAM, 512GB SSD, business", price:"₹52,990"},
+        {brand:"Dell", name:"Latitude 5450 (Latest Gen)", specs:"Intel Core Ultra 5, 16GB RAM, 512GB SSD, vPro", price:"₹82,000"},
+        {brand:"Dell", name:"Latitude 7450 (Latest Gen)", specs:"Intel Core Ultra 7, 16GB RAM, 512GB SSD, premium biz", price:"₹1,22,000"},
+        {brand:"Dell", name:"XPS 13", specs:"Core i7, 16GB RAM, 512GB SSD, ultra-premium", price:"₹1,35,000"},
+        {brand:"Dell", name:"Pro 14 Premium (Dell 14 Pro)", specs:"Intel Core Ultra (Series 3), 16GB RAM, 512GB SSD, vPro, latest-gen", price:"₹98,990"},
+      ]},
+      { name:"Lenovo Laptops", items:[
+        {brand:"Lenovo", name:"IdeaPad Slim 3", specs:"Ryzen 5 / Core i5, 8GB RAM, 512GB SSD", price:"₹42,990"},
+        {brand:"Lenovo", name:"ThinkBook 14 Gen 7", specs:"Core Ultra 5, 16GB RAM, 512GB SSD, business-slim", price:"₹64,990"},
+        {brand:"Lenovo", name:"ThinkBook 14 2-in-1 Gen 7", specs:"Core Ultra 7, 16GB RAM, 1TB SSD, touch convertible", price:"₹89,990"},
+        {brand:"Lenovo", name:"ThinkPad E14 Gen 6", specs:"Core Ultra 7, 16GB RAM, 512GB SSD", price:"₹74,990"},
+        {brand:"Lenovo", name:"ThinkPad T14 Gen 6 (Latest Gen)", specs:"Core Ultra 7 vPro, 32GB RAM, 512GB SSD, business-grade", price:"₹1,08,500"},
+        {brand:"Lenovo", name:"ThinkPad X13 Gen 5", specs:"Core Ultra 7, 32GB RAM, 1TB SSD, ultralight", price:"₹1,45,000"},
+        {brand:"Lenovo", name:"ThinkPad P16 Mobile Workstation", specs:"Core i9, 64GB RAM, 2TB SSD, discrete GPU", price:"₹3,09,500"},
+      ]},
+      { name:"HP Laptops", items:[
+        {brand:"HP", name:"Pavilion 14", specs:"12th Gen Core i5, 16GB RAM, 512GB SSD", price:"₹58,990"},
+        {brand:"HP", name:"ProBook 440 14-inch G11 (latest)", specs:"Intel Core Ultra 5/7, 16GB RAM, 512GB SSD, business-grade", price:"₹72,500"},
+        {brand:"HP", name:"ProBook 450 G10", specs:"13th Gen Core i5, 16GB RAM, 512GB SSD, business", price:"₹68,500"},
+        {brand:"HP", name:"ProBook 445 G11", specs:"Ryzen 7, 16GB RAM, 512GB SSD", price:"₹63,900"},
+        {brand:"HP", name:"EliteBook 640 G9", specs:"12th Gen Core i5, 16GB RAM, 512GB SSD, vPro", price:"₹96,500"},
+        {brand:"HP", name:"EliteBook 840 G11 (Latest Gen)", specs:"Core Ultra 7, 32GB RAM, 512GB SSD, Wolf Security", price:"₹1,32,000"},
+      ]},
+      { name:"Desktops", items:[
+        {brand:"Dell", name:"OptiPlex 3000 Micro", specs:"Core i5, 8GB RAM, 256GB SSD, micro form-factor", price:"₹48,500"},
+        {brand:"Dell", name:"OptiPlex 7010 Tower", specs:"Core i7, 16GB RAM, 512GB SSD", price:"₹78,900"},
+        {brand:"Dell", name:"OptiPlex 7020 Tower (Latest Gen)", specs:"Intel Core Ultra 7, 16GB RAM, 512GB SSD, AI-ready", price:"₹92,000"},
+        {brand:"Lenovo", name:"ThinkCentre neo 50a Gen 5 AIO", specs:"Core i5, 8GB RAM, 512GB SSD, all-in-one", price:"₹52,900"},
+        {brand:"Lenovo", name:"ThinkCentre M70q Gen 4 Tiny", specs:"Core i5, 16GB RAM, 512GB SSD", price:"₹65,500"},
+        {brand:"Lenovo", name:"ThinkCentre M90q Gen 6 Tiny (Latest Gen)", specs:"Core Ultra 7 vPro, 16GB RAM, 512GB SSD, AI-driven", price:"₹78,500"},
+        {brand:"HP", name:"ProDesk 400 G9", specs:"Core i5, 8GB RAM, 512GB SSD", price:"₹49,900"},
+        {brand:"HP", name:"EliteDesk 800 G9 SFF", specs:"Core i7, 16GB RAM, 512GB SSD, small form-factor", price:"₹82,500"},
+        {brand:"HP", name:"Elite 8 Mini G1i (Latest Gen)", specs:"Core Ultra 7, 16GB RAM, 512GB SSD, rebranded EliteDesk successor", price:"₹88,500"},
+      ]},
+    ]
+  },
+  cabling: {
+    title: "Structured Cabling — Services & Materials",
+    desc: "Certified Cat6/6A copper and OM3/OM4 fiber cabling, racks and termination hardware, priced per point or per project.",
+    serviceValue: "Structured Cabling",
+    groups: [
+      { name:"Cabling & Rack Services", items:[
+        {brand:"Service", name:"Cat6 Data Point (Supply + Termination)", specs:"UTP cable, faceplate, patch cord, testing", price:"₹950 / point"},
+        {brand:"Service", name:"Cat6A Data Point", specs:"Shielded UTP, higher bandwidth, testing", price:"₹1,350 / point"},
+        {brand:"Service", name:"OM4 Fiber Run (per core, up to 90m)", specs:"LC termination both ends, OTDR test report", price:"₹2,800 / core"},
+        {brand:"Service", name:"42U Server Rack — Supply & Install", specs:"Perforated doors, cable manager, PDU mount", price:"₹38,000"},
+        {brand:"Service", name:"Patch Panel — 24-Port Cat6", specs:"Supply & termination", price:"₹4,500"},
+      ]},
+    ]
+  },
+  datacenter: {
+    title: "Data Center & Cloud — Solutions",
+    desc: "Server room build-out, virtualization, backup/DR and hybrid cloud migration — scoped and quoted per site assessment.",
+    serviceValue: "Data Center & Cloud",
+    groups: [
+      { name:"Server Room & Cloud Services", items:[
+        {brand:"Dell PowerEdge", name:"T350 Tower Server", specs:"Xeon E-2400, 16GB RAM, 2x 1TB HDD", price:"₹1,95,000"},
+        {brand:"Dell PowerEdge", name:"R450 Rack Server", specs:"Dual Xeon Silver, 32GB RAM, RAID", price:"₹3,45,000"},
+        {brand:"HPE ProLiant", name:"DL380 Gen11 Rack Server", specs:"Dual Xeon, 32GB RAM, RAID, redundant PSU", price:"₹4,20,000"},
+        {brand:"Service", name:"Virtualization Setup (VMware/Hyper-V)", specs:"Host config, storage, network, HA — per host", price:"From ₹35,000"},
+        {brand:"Service", name:"Backup & Disaster Recovery Design", specs:"Backup target, replication, DR runbook", price:"Quote on assessment"},
+        {brand:"Service", name:"Hybrid Cloud Migration", specs:"Azure/AWS workload migration & cutover", price:"Quote on assessment"},
+      ]},
+    ]
+  },
+  surveillance: {
+    title: "Surveillance & Security — Camera Inventory",
+    desc: "Hikvision and CP Plus cameras including PTZ, plus recorders — indicative per-unit pricing from official/authorized listings.",
+    serviceValue: "Surveillance & Security",
+    groups: [
+      { name:"Hikvision Cameras", items:[
+        {brand:"Hikvision", name:"DS-2CE1ACOT-IRPF", specs:"2MP HD Bullet, 20m IR, indoor/outdoor", price:"₹1,150"},
+        {brand:"Hikvision", name:"DS-2CE1AD0T-IRPF", specs:"2MP Turbo HD Bullet, plastic body", price:"₹1,450"},
+        {brand:"Hikvision", name:"DS-2CE5AD0T-IRPF", specs:"2MP Turbo HD Dome, 20m IR", price:"₹1,350"},
+        {brand:"Hikvision", name:"DS-2CD1343G0-I", specs:"4MP IP Dome, IR 30m, PoE", price:"₹4,450"},
+        {brand:"Hikvision", name:"DS-2CD2085G1-I", specs:"8MP (4K) IP Bullet, ColorVu, PoE", price:"₹13,500"},
+      ]},
+      { name:"Hikvision PTZ Cameras", items:[
+        {brand:"Hikvision", name:"DS-2AE5225TI-A", specs:"2MP 25x Analog PTZ (HD-TVI), 150m IR", price:"₹52,000"},
+        {brand:"Hikvision", name:"DS-2DE4425IW-DE", specs:"4MP 25x Network PTZ, AcuSense, 100m IR", price:"₹68,000"},
+        {brand:"Hikvision", name:"DS-2DE5225IW-AE", specs:"2MP 25x Network PTZ, 150m IR, auto-tracking", price:"₹95,000"},
+        {brand:"Hikvision", name:"TandemVu DS-2SE4C425MWG-EL", specs:"Bullet + PTZ dual-lens, panoramic tracking", price:"₹1,85,000"},
+      ]},
+      { name:"CP Plus Cameras", items:[
+        {brand:"CP Plus", name:"CP-UVC-D1A2WDS4-D", specs:"2MP HD Dome, 20m IR", price:"₹998"},
+        {brand:"CP Plus", name:"CP-VAC-T81PL3-DS", specs:"2MP HD Bullet, 25m IR", price:"₹995"},
+        {brand:"CP Plus", name:"CP-UNC-DA13L3", specs:"1.3MP IP Dome, PoE", price:"₹4,457"},
+        {brand:"CP Plus", name:"CP-UNC-TA21PL3-D", specs:"2MP IP Bullet, night-vision, PoE", price:"₹5,309"},
+        {brand:"CP Plus", name:"CP-UNC-VC41L5C-VMD-LQ", specs:"4MP Dual-Light Vandal Dome, STQC certified", price:"₹7,350"},
+        {brand:"CP Plus", name:"CP-UNC-TC41L5C-VMD-LQ", specs:"4MP IP Bullet, 50m range, STQC certified", price:"₹7,350"},
+      ]},
+      { name:"CP Plus PTZ Cameras", items:[
+        {brand:"CP Plus", name:"CP-VAC-D2A2WDS5", specs:"2MP 20x Analog Speed Dome PTZ", price:"₹42,000"},
+        {brand:"CP Plus", name:"CP-UNP-D2521L10-DAQ", specs:"2MP 25x Network PTZ, 100m range, STQC", price:"₹34,750"},
+        {brand:"CP Plus", name:"CP-UNP-E3241L18-DAQ", specs:"4MP 32x Network PTZ, 175m range, STQC", price:"₹68,500"},
+      ]},
+      { name:"Recorders (DVR/NVR)", items:[
+        {brand:"Hikvision", name:"DS-7208HGHI-K1", specs:"8-Channel Turbo HD DVR", price:"₹7,490"},
+        {brand:"Hikvision", name:"DS-7216HQHI-K2", specs:"16-Channel Turbo HD DVR", price:"₹38,000"},
+        {brand:"Hikvision", name:"DS-7608NI-K2", specs:"8-Channel PoE NVR", price:"₹9,500"},
+        {brand:"CP Plus", name:"CP-UVR-0801E1-HC", specs:"8-Channel HD DVR", price:"₹6,500"},
+        {brand:"CP Plus", name:"CP-UNR-3162P2-V2", specs:"16-Channel PoE NVR", price:"₹18,900"},
+      ]},
+    ]
+  },
+  amc: {
+    title: "AMC & Support — Service Plans",
+    desc: "Annual maintenance contracts covering hardware, network, and surveillance infrastructure, backed by defined SLAs.",
+    serviceValue: "AMC & Support",
+    groups: [
+      { name:"AMC Packages", items:[
+        {brand:"AMC", name:"Basic AMC (Non-Comprehensive)", specs:"Quarterly preventive visits, remote monitoring, labor covered — parts billed separately", price:"From ₹1,800/device/yr"},
+        {brand:"AMC", name:"Comprehensive AMC", specs:"Parts + labor covered, priority on-site response under 4 hrs, quarterly health reports", price:"From ₹4,500/device/yr"},
+        {brand:"AMC", name:"Network AMC", specs:"Router/switch/firewall/Wi-Fi uptime monitoring, config backups, patch management", price:"From ₹15,000/site/yr"},
+        {brand:"AMC", name:"Server & Data Center AMC", specs:"Server health checks, backup verification, DR drills, rack & UPS maintenance", price:"From ₹35,000/server/yr"},
+        {brand:"AMC", name:"CCTV / Surveillance AMC", specs:"Camera cleaning & realignment, DVR/NVR health checks, storage health checks, footage-retrieval support", price:"From ₹1,200/camera/yr"},
+        {brand:"AMC", name:"Desktop & Laptop Fleet AMC", specs:"OS & antivirus updates, hardware diagnostics, break-fix replacement SLA", price:"From ₹2,000/device/yr"},
+        {brand:"AMC", name:"24/7 Helpdesk Add-On", specs:"Round-the-clock remote support line for AMC clients", price:"From ₹8,000/site/yr"},
+      ]},
+    ]
+  },
+  procurement: {
+    title: "IT Procurement — Services",
+    desc: "Bulk hardware and software licensing procurement with vendor coordination and warranty management.",
+    serviceValue: "Something else",
+    groups: [
+      { name:"Procurement Services", items:[
+        {brand:"Service", name:"Bulk Hardware Procurement", specs:"Laptops, desktops, servers, networking — vendor sourcing & negotiation", price:"Quote on volume"},
+        {brand:"Service", name:"Software & OS Licensing", specs:"Windows, Microsoft 365, antivirus, server CALs", price:"Quote on volume"},
+        {brand:"Service", name:"Warranty & AMC Tracking", specs:"Centralized asset register with renewal alerts", price:"Included with AMC"},
+        {brand:"Service", name:"Import & Vendor Coordination", specs:"Multi-vendor order consolidation and delivery scheduling", price:"Quote on project"},
+      ]},
+    ]
+  },
+  staffing: {
+    title: "On-Site Staffing — Plans & Rates",
+    desc: "Deployed IT engineers and helpdesk staff for organizations that need hands on the ground daily.",
+    serviceValue: "Something else",
+    groups: [
+      { name:"Staffing Plans", items:[
+        {brand:"Staffing", name:"Dedicated On-Site IT Engineer", specs:"Full-time, single site, hardware/network troubleshooting", price:"From ₹28,000/month"},
+        {brand:"Staffing", name:"Shared Helpdesk Technician", specs:"Part-time / multi-site rotation", price:"From ₹16,000/month"},
+        {brand:"Staffing", name:"Project-Based Deployment Team", specs:"Short-term rollout/migration staffing, per project", price:"Quote on scope"},
+        {brand:"Staffing", name:"Remote NOC Monitoring Staff", specs:"Network operations center coverage, business hours or 24/7", price:"From ₹22,000/month"},
+      ]},
+    ]
+  },
+};
+
+let currentCategory = null;
+let currentTab = 0;
+
+function openCatalog(key){
+  const data = CATALOG[key];
+  if(!data) return;
+  currentCategory = key;
+  currentTab = 0;
+  document.getElementById('catalogTitle').textContent = data.title;
+  document.getElementById('catalogDesc').textContent = data.desc;
+
+  const tabsEl = document.getElementById('catalogTabs');
+  tabsEl.innerHTML = data.groups.map((g,i) =>
+    `<button class="catalog-tab${i===0?' active':''}" onclick="switchTab(${i})">${g.name}</button>`
+  ).join('');
+
+  renderGrid();
+  document.getElementById('catalogOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function switchTab(i){
+  currentTab = i;
+  document.querySelectorAll('.catalog-tab').forEach((el, idx) => {
+    el.classList.toggle('active', idx === i);
+  });
+  renderGrid();
+}
+
+function renderGrid(){
+  const data = CATALOG[currentCategory];
+  const group = data.groups[currentTab];
+  const grid = document.getElementById('catalogGrid');
+  grid.innerHTML = group.items.map(item => `
+    <div class="catalog-item">
+      <div class="brand-tag">${item.brand}</div>
+      <h4>${item.name}</h4>
+      <div class="specs">${item.specs}</div>
+      <div class="price-row">
+        <div class="price">${item.price}</div>
+      </div>
+      <button class="catalog-buy" onclick="requestQuote('${item.name.replace(/'/g,"\\'")}', '${data.serviceValue.replace(/'/g,"\\'")}')">Enquire to Purchase</button>
+    </div>
+  `).join('');
+}
+
+function closeCatalog(){
+  document.getElementById('catalogOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function requestQuote(itemName, serviceValue){
+  closeCatalog();
+  const serviceSelect = document.getElementById('service');
+  if(serviceSelect){
+    for(const opt of serviceSelect.options){
+      if(opt.value === serviceValue){ serviceSelect.value = serviceValue; break; }
+    }
+  }
+  const msg = document.getElementById('msg');
+  if(msg){
+    msg.value = `I'd like a formal quote for: ${itemName}. Please share current pricing, availability, and delivery timeline.`;
+  }
+  document.getElementById('contact').scrollIntoView({behavior:'smooth', block:'start'});
+  const fname = document.getElementById('fname');
+  if(fname) setTimeout(() => fname.focus(), 500);
+}
+
+document.addEventListener('keydown', (e) => {
+  if(e.key === 'Escape') closeCatalog();
+});
+</script>
+
+</body>
+</html>
