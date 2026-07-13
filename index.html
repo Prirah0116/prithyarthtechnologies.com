@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prithyarth Technologies — Networking, Hardware & IT Services</title>
+<meta name="description" content="Prithyarth Technologies delivers end-to-end IT infrastructure — networking, hardware supply, structured cabling, data center and AMC support — for businesses across India.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0A0E13;
+    --panel:#121820;
+    --panel-raised:#1A222C;
+    --border:#232D38;
+    --text:#EDF1F5;
+    --text-dim:#93A1AF;
+    --text-faint:#5C6B7A;
+    --steel:#4A8FC2;
+    --steel-dim:#2E5473;
+    --amber:#F2A93C;
+    --teal:#4FBFA0;
+    --radius:10px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Inter',sans-serif;
+    line-height:1.6;
+    overflow-x:hidden;
+    background-image:
+      linear-gradient(var(--border) 1px, transparent 1px),
+      linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size:64px 64px;
+    background-position:center top;
+    background-attachment:fixed;
+    background-color:var(--bg);
+  }
+  body::before{
+    content:"";
+    position:fixed;inset:0;
+    background:radial-gradient(ellipse 80% 50% at 50% -10%, rgba(74,143,194,0.12), transparent 60%);
+    pointer-events:none;
+    z-index:0;
+  }
+  h1,h2,h3,h4{font-family:'Space Grotesk',sans-serif;font-weight:600;letter-spacing:-0.01em;}
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:var(--steel);
+    display:flex;align-items:center;gap:10px;
+    margin-bottom:16px;
+  }
+  .eyebrow::before{content:"";width:20px;height:1px;background:var(--steel);display:inline-block;}
+  a{color:inherit;text-decoration:none;}
+  .container{max-width:1180px;margin:0 auto;padding:0 32px;}
+  section{position:relative;z-index:1;}
+
+  /* NAV */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(10,14,19,0.85);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--border);
+  }
+  nav{
+    max-width:1180px;margin:0 auto;padding:18px 32px;
+    display:flex;align-items:center;justify-content:space-between;
+  }
+  .logo{
+    display:flex;align-items:center;gap:10px;
+    font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:19px;
+    color:var(--text);
+  }
+  .logo-mark{
+    width:34px;height:34px;border-radius:6px;
+    background:linear-gradient(135deg, var(--steel), var(--teal));
+    display:flex;align-items:center;justify-content:center;
+    font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:14px;color:#081016;
+    flex-shrink:0;
+  }
+  .logo small{display:block;font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:400;letter-spacing:0.08em;color:var(--text-faint);text-transform:uppercase;margin-top:2px;}
+  .nav-links{display:flex;gap:36px;align-items:center;}
+  .nav-links a{font-size:14.5px;color:var(--text-dim);transition:color .2s;}
+  .nav-links a:hover{color:var(--text);}
+  .btn{
+    font-family:'Inter',sans-serif;font-weight:600;font-size:14.5px;
+    padding:11px 22px;border-radius:7px;
+    display:inline-flex;align-items:center;gap:8px;
+    transition:all .2s;cursor:pointer;border:none;
+  }
+  .btn-primary{background:var(--amber);color:#1A1000;}
+  .btn-primary:hover{background:#ffb84d;transform:translateY(-1px);}
+  .btn-ghost{border:1px solid var(--border);color:var(--text);background:transparent;}
+  .btn-ghost:hover{border-color:var(--steel);}
+  .nav-cta{display:flex;gap:12px;}
+  .nav-toggle{display:none;background:none;border:none;color:var(--text);font-size:24px;cursor:pointer;}
+
+  /* HERO */
+  .hero{padding:100px 0 80px;}
+  .hero-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:60px;align-items:center;}
+  .hero h1{font-size:52px;line-height:1.08;margin-bottom:22px;}
+  .hero h1 span{color:var(--steel);}
+  .hero p.lead{font-size:17px;color:var(--text-dim);max-width:480px;margin-bottom:32px;}
+  .hero-ctas{display:flex;gap:14px;margin-bottom:44px;flex-wrap:wrap;}
+  .hero-stats{display:flex;gap:36px;flex-wrap:wrap;}
+  .stat b{display:block;font-family:'Space Grotesk',sans-serif;font-size:26px;color:var(--text);}
+  .stat span{font-size:12.5px;color:var(--text-faint);font-family:'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:0.06em;}
+
+  /* NETWORK DIAGRAM SIGNATURE */
+  .diagram-wrap{
+    position:relative;
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:16px;
+    padding:20px;
+    aspect-ratio:1/1;
+  }
+  .diagram-wrap .tag{
+    position:absolute;top:16px;left:20px;
+    font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--text-faint);
+    letter-spacing:0.05em;
+  }
+  .diagram-wrap svg{width:100%;height:100%;}
+  .net-line{
+    stroke:var(--steel-dim);
+    stroke-width:1.5;
+    fill:none;
+    stroke-dasharray:6 5;
+  }
+  .net-line.active{
+    stroke:var(--steel);
+    stroke-dasharray:400;
+    stroke-dashoffset:400;
+    animation:drawline 2.4s ease forwards infinite;
+  }
+  .net-line.active.d1{animation-delay:0s;}
+  .net-line.active.d2{animation-delay:.3s;}
+  .net-line.active.d3{animation-delay:.6s;}
+  .net-line.active.d4{animation-delay:.9s;}
+  @keyframes drawline{
+    0%{stroke-dashoffset:400;opacity:0;}
+    15%{opacity:1;}
+    60%{stroke-dashoffset:0;opacity:1;}
+    100%{stroke-dashoffset:0;opacity:0;}
+  }
+  .node-circle{fill:var(--panel-raised);stroke:var(--border);stroke-width:1.5;}
+  .node-circle.hub{stroke:var(--amber);}
+  .node-label{font-family:'IBM Plex Mono',monospace;font-size:9.5px;fill:var(--text-dim);text-anchor:middle;}
+  .pulse{
+    fill:var(--teal);
+    animation:pulse 2.2s ease-in-out infinite;
+  }
+  @keyframes pulse{
+    0%,100%{opacity:.3;r:3;}
+    50%{opacity:1;r:5;}
+  }
+
+  /* TRUST BAR */
+  .trust{border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:28px 0;background:var(--panel);}
+  .trust .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;}
+  .trust-item{font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:var(--text-faint);letter-spacing:0.04em;}
+  .trust-item b{color:var(--text-dim);font-weight:500;}
+
+  /* SECTION HEADS */
+  .section-head{max-width:640px;margin-bottom:56px;}
+  .section-head h2{font-size:34px;margin-bottom:14px;}
+  .section-head p{color:var(--text-dim);font-size:15.5px;}
+  .section-pad{padding:100px 0;}
+
+  /* SERVICES */
+  .services-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:14px;overflow:hidden;}
+  .service-card{background:var(--panel);padding:32px 26px;transition:background .2s;}
+  .service-card:hover{background:var(--panel-raised);}
+  .service-icon{
+    width:42px;height:42px;border-radius:8px;
+    background:var(--panel-raised);border:1px solid var(--border);
+    display:flex;align-items:center;justify-content:center;
+    margin-bottom:20px;color:var(--steel);
+  }
+  .service-card h3{font-size:16.5px;margin-bottom:10px;}
+  .service-card p{font-size:13.5px;color:var(--text-dim);}
+  .service-tag{
+    display:inline-block;margin-top:14px;
+    font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--text-faint);
+    border:1px solid var(--border);padding:3px 8px;border-radius:4px;
+  }
+
+  /* PROCESS */
+  .process{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;position:relative;}
+  .process::before{
+    content:"";position:absolute;top:26px;left:8%;right:8%;height:1px;
+    background:repeating-linear-gradient(90deg, var(--border) 0 8px, transparent 8px 14px);
+    z-index:0;
+  }
+  .process-step{position:relative;z-index:1;}
+  .process-num{
+    width:52px;height:52px;border-radius:50%;
+    background:var(--panel);border:1.5px solid var(--steel);
+    display:flex;align-items:center;justify-content:center;
+    font-family:'IBM Plex Mono',monospace;color:var(--steel);font-size:15px;
+    margin-bottom:20px;
+  }
+  .process-step h4{font-size:17px;margin-bottom:8px;}
+  .process-step p{font-size:13.5px;color:var(--text-dim);}
+
+  /* WHY US */
+  .why-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;}
+  .why-list{display:flex;flex-direction:column;gap:26px;}
+  .why-item{display:flex;gap:18px;}
+  .why-item .num{font-family:'IBM Plex Mono',monospace;color:var(--amber);font-size:13px;flex-shrink:0;padding-top:3px;}
+  .why-item h4{font-size:16px;margin-bottom:6px;}
+  .why-item p{font-size:13.5px;color:var(--text-dim);}
+  .why-panel{
+    background:var(--panel);border:1px solid var(--border);border-radius:14px;
+    padding:36px;
+  }
+  .why-panel .metric{display:flex;justify-content:space-between;align-items:baseline;padding:16px 0;border-bottom:1px solid var(--border);}
+  .why-panel .metric:last-child{border-bottom:none;}
+  .why-panel .metric b{font-family:'Space Grotesk',sans-serif;font-size:22px;}
+  .why-panel .metric span{font-size:12.5px;color:var(--text-faint);font-family:'IBM Plex Mono',monospace;}
+
+  /* TESTIMONIAL */
+  .testimonial-strip{background:var(--panel);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+  .testimonial-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);}
+  .t-card{background:var(--panel);padding:38px 32px;}
+  .t-card p{font-size:14.5px;color:var(--text-dim);margin-bottom:20px;font-style:italic;}
+  .t-who{font-size:13px;color:var(--text);font-weight:600;}
+  .t-role{font-size:12px;color:var(--text-faint);font-family:'IBM Plex Mono',monospace;}
+
+  /* CONTACT */
+  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;}
+  .contact-info-item{margin-bottom:28px;}
+  .contact-info-item .eyebrow{margin-bottom:8px;}
+  .contact-info-item p{font-size:15px;color:var(--text);}
+  .contact-info-item span{font-size:13px;color:var(--text-faint);}
+  form{display:flex;flex-direction:column;gap:16px;}
+  .form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  input,textarea,select{
+    background:var(--panel);border:1px solid var(--border);border-radius:7px;
+    padding:13px 14px;color:var(--text);font-family:'Inter',sans-serif;font-size:14px;
+    width:100%;
+  }
+  input:focus,textarea:focus,select:focus{outline:2px solid var(--steel);outline-offset:1px;}
+  textarea{resize:vertical;min-height:100px;}
+  label{font-size:12.5px;color:var(--text-faint);font-family:'IBM Plex Mono',monospace;margin-bottom:6px;display:block;}
+
+  /* FOOTER */
+  footer{border-top:1px solid var(--border);padding:56px 0 28px;}
+  .footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px;margin-bottom:48px;}
+  .footer-col h5{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-faint);margin-bottom:18px;}
+  .footer-col a{display:block;font-size:14px;color:var(--text-dim);margin-bottom:12px;transition:color .2s;}
+  .footer-col a:hover{color:var(--steel);}
+  .footer-bottom{border-top:1px solid var(--border);padding-top:24px;display:flex;justify-content:space-between;color:var(--text-faint);font-size:12.5px;font-family:'IBM Plex Mono',monospace;flex-wrap:wrap;gap:10px;}
+
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease, transform .6s ease;}
+  .reveal.visible{opacity:1;transform:translateY(0);}
+
+  @media (max-width:900px){
+    .hero-grid,.why-grid,.contact-grid{grid-template-columns:1fr;}
+    .services-grid{grid-template-columns:repeat(2,1fr);}
+    .testimonial-grid{grid-template-columns:1fr;}
+    .process{grid-template-columns:1fr 1fr;row-gap:36px;}
+    .process::before{display:none;}
+    .footer-grid{grid-template-columns:1fr 1fr;}
+    .nav-links{position:fixed;top:70px;left:0;right:0;background:var(--bg);border-bottom:1px solid var(--border);flex-direction:column;padding:24px 32px;gap:20px;display:none;}
+    .nav-links.open{display:flex;}
+    .nav-toggle{display:block;}
+    .nav-cta{display:none;}
+    .hero h1{font-size:36px;}
+  }
+  @media (max-width:600px){
+    .services-grid{grid-template-columns:1fr;}
+    .process{grid-template-columns:1fr;}
+    .form-row{grid-template-columns:1fr;}
+    .footer-grid{grid-template-columns:1fr;}
+    .hero-stats{gap:24px;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .net-line.active{animation:none;stroke-dasharray:none;opacity:1;}
+    .pulse{animation:none;}
+    .reveal{transition:none;opacity:1;transform:none;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <div class="logo">
+      <div class="logo-mark">PT</div>
+      <div>Prithyarth Technologies<small>IT Infrastructure &amp; Services</small></div>
+    </div>
+    <div class="nav-links" id="navLinks">
+      <a href="#services">Services</a>
+      <a href="#process">How We Work</a>
+      <a href="#why">Why Us</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="nav-cta">
+      <a href="tel:+917780978023" class="btn btn-ghost">Call Us</a>
+      <a href="#contact" class="btn btn-primary">Get a Quote</a>
+    </div>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">☰</button>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="container hero-grid">
+    <div>
+      <div class="eyebrow">IT Equipment &amp; Managed Services</div>
+      <h1>Networking to hardware —<br><span>every IT layer</span>, one partner.</h1>
+      <p class="lead">Prithyarth Technologies designs, supplies, and supports the infrastructure that keeps businesses running: structured networks, servers and hardware, data centers, and on-call technical support — under one roof.</p>
+      <div class="hero-ctas">
+        <a href="#contact" class="btn btn-primary">Request a Site Assessment</a>
+        <a href="#services" class="btn btn-ghost">View Services</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><b>250+</b><span>Deployments Delivered</span></div>
+        <div class="stat"><b>40+</b><span>Enterprise Clients</span></div>
+        <div class="stat"><b>24/7</b><span>Support Desk</span></div>
+        <div class="stat"><b>PAN India</b><span>Service Coverage</span></div>
+      </div>
+    </div>
+    <div class="diagram-wrap reveal" id="diagramWrap">
+      <span class="tag">// live-network-map.svg</span>
+      <svg viewBox="0 0 400 400">
+        <!-- lines -->
+        <path class="net-line active d1" d="M200,90 L120,180"/>
+        <path class="net-line active d2" d="M200,90 L280,180"/>
+        <path class="net-line active d3" d="M120,180 L90,280"/>
+        <path class="net-line active d4" d="M120,180 L160,290"/>
+        <path class="net-line active d1" d="M280,180 L250,290"/>
+        <path class="net-line active d2" d="M280,180 L320,280"/>
+        <path class="net-line active d3" d="M200,90 L200,40"/>
+
+        <!-- cloud node -->
+        <circle class="node-circle hub" cx="200" cy="40" r="22"/>
+        <text class="node-label" x="200" y="44">CLOUD</text>
+
+        <!-- core node -->
+        <circle class="node-circle hub" cx="200" cy="90" r="26"/>
+        <text class="node-label" x="200" y="94">CORE</text>
+
+        <!-- switches -->
+        <circle class="node-circle" cx="120" cy="180" r="20"/>
+        <text class="node-label" x="120" y="184">SW-1</text>
+        <circle class="node-circle" cx="280" cy="180" r="20"/>
+        <text class="node-label" x="280" y="184">SW-2</text>
+
+        <!-- endpoints -->
+        <circle class="node-circle" cx="90" cy="280" r="15"/>
+        <text class="node-label" x="90" y="283">SRV</text>
+        <circle class="node-circle" cx="160" cy="290" r="15"/>
+        <text class="node-label" x="160" y="293">PC</text>
+        <circle class="node-circle" cx="250" cy="290" r="15"/>
+        <text class="node-label" x="250" y="293">NVR</text>
+        <circle class="node-circle" cx="320" cy="280" r="15"/>
+        <text class="node-label" x="320" y="283">AP</text>
+
+        <!-- pulses -->
+        <circle class="pulse" cx="200" cy="90" r="3"/>
+        <circle class="pulse" cx="120" cy="180" r="3" style="animation-delay:.5s"/>
+        <circle class="pulse" cx="280" cy="180" r="3" style="animation-delay:1s"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<div class="trust">
+  <div class="container">
+    <div class="trust-item"><b>Authorized reseller</b> — Cisco · HPE · Dell · APC</div>
+    <div class="trust-item"><b>ISO-aligned</b> service delivery process</div>
+    <div class="trust-item"><b>GST-registered</b> · corporate billing supported</div>
+    <div class="trust-item"><b>SLA-backed</b> AMC &amp; support contracts</div>
+  </div>
+</div>
+
+<section class="section-pad" id="services">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow">What We Do</div>
+      <h2>Full-stack IT services, not just a piece of it</h2>
+      <p>Most vendors sell hardware or manage networks. We do both — plus everything that connects them — so you deal with one accountable partner instead of five.</p>
+    </div>
+    <div class="services-grid reveal">
+      <div class="service-card">
+        <div class="service-icon">◈</div>
+        <h3>Networking</h3>
+        <p>LAN/WAN design, routers, switches, firewalls, Wi-Fi rollouts and network security for offices of any size.</p>
+        <span class="service-tag">NET</span>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">▣</div>
+        <h3>Hardware Supply</h3>
+        <p>Servers, workstations, laptops, storage arrays and peripherals — sourced, configured, and delivered.</p>
+        <span class="service-tag">HW</span>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">▤</div>
+        <h3>Structured Cabling</h3>
+        <p>Cat6/6A and fiber cabling, patch panels, and rack setups built to certified industry standards.</p>
+        <span class="service-tag">CBL</span>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">◫</div>
+        <h3>Data Center &amp; Cloud</h3>
+        <p>Server room design, virtualization, backup &amp; disaster recovery, and hybrid cloud migration.</p>
+        <span class="service-tag">DC</span>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">◉</div>
+        <h3>Surveillance &amp; Security</h3>
+        <p>CCTV, access control, and NVR/DVR systems integrated with your existing network infrastructure.</p>
+        <span class="service-tag">SEC</span>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">⟲</div>
+        <h3>AMC &amp; Support</h3>
+        <p>Annual maintenance contracts with defined SLAs, remote monitoring, and on-site engineer visits.</p>
+        <span class="service-tag">AMC</span>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">▥</div>
+        <h3>IT Procurement</h3>
+        <p>Bulk hardware and licensing procurement with vendor coordination and warranty management.</p>
+        <span class="service-tag">PRC</span>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">◎</div>
+        <h3>On-Site Staffing</h3>
+        <p>Deployed IT engineers and helpdesk staff for organizations that need hands on the ground daily.</p>
+        <span class="service-tag">STF</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-pad" id="process" style="padding-top:0;">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow">Engagement Process</div>
+      <h2>How a project runs, start to finish</h2>
+      <p>The same four-stage process for a single server room or a multi-branch rollout.</p>
+    </div>
+    <div class="process reveal">
+      <div class="process-step">
+        <div class="process-num">01</div>
+        <h4>Assess</h4>
+        <p>Site survey, current infrastructure audit, and requirement mapping against your budget and timeline.</p>
+      </div>
+      <div class="process-step">
+        <div class="process-num">02</div>
+        <h4>Design</h4>
+        <p>Network topology, hardware BOM, and rollout plan — reviewed and signed off before procurement begins.</p>
+      </div>
+      <div class="process-step">
+        <div class="process-num">03</div>
+        <h4>Deploy</h4>
+        <p>Installation, cabling, configuration, and testing carried out by certified engineers on your schedule.</p>
+      </div>
+      <div class="process-step">
+        <div class="process-num">04</div>
+        <h4>Support</h4>
+        <p>Handover documentation, staff training, and ongoing AMC support with defined response SLAs.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-pad" id="why">
+  <div class="container why-grid">
+    <div class="reveal">
+      <div class="eyebrow">Why Prithyarth</div>
+      <h2 style="font-size:32px;margin-bottom:32px;">Built for businesses that can't afford IT downtime</h2>
+      <div class="why-list">
+        <div class="why-item">
+          <div class="num">→</div>
+          <div><h4>Single point of accountability</h4><p>One contract, one support number, for hardware, network, and maintenance — no finger-pointing between vendors.</p></div>
+        </div>
+        <div class="why-item">
+          <div class="num">→</div>
+          <div><h4>Certified engineering team</h4><p>Vendor-certified technicians for Cisco, HPE, Dell and major firewall and surveillance platforms.</p></div>
+        </div>
+        <div class="why-item">
+          <div class="num">→</div>
+          <div><h4>Transparent SLAs</h4><p>Defined response and resolution times in every AMC — tracked and reported, not just promised.</p></div>
+        </div>
+        <div class="why-item">
+          <div class="num">→</div>
+          <div><h4>Scales with you</h4><p>From a single branch office to a multi-site rollout, the same process and team scale with your growth.</p></div>
+        </div>
+      </div>
+    </div>
+    <div class="why-panel reveal">
+      <div class="metric"><span>Avg. incident response</span><b>&lt; 4 hrs</b></div>
+      <div class="metric"><span>Client retention rate</span><b>92%</b></div>
+      <div class="metric"><span>Certified engineers on staff</span><b>18</b></div>
+      <div class="metric"><span>Cities with active AMC clients</span><b>12+</b></div>
+      <div class="metric"><span>Years in IT infrastructure</span><b>10+</b></div>
+    </div>
+  </div>
+</section>
+
+<div class="testimonial-strip">
+  <div class="testimonial-grid">
+    <div class="t-card reveal">
+      <p>"They rewired our entire office network over a weekend with zero disruption on Monday. Documentation was better than what our last three vendors combined gave us."</p>
+      <div class="t-who">Facilities Head</div>
+      <div class="t-role">Manufacturing Firm, Jammu</div>
+    </div>
+    <div class="t-card reveal">
+      <p>"Our AMC response time actually matches what's in the contract. That alone made switching worth it."</p>
+      <div class="t-who">IT Manager</div>
+      <div class="t-role">Regional Bank Branch Network</div>
+    </div>
+    <div class="t-card reveal">
+      <p>"From server procurement to rack installation, they handled vendor coordination we used to do ourselves."</p>
+      <div class="t-who">Operations Director</div>
+      <div class="t-role">Logistics Company</div>
+    </div>
+  </div>
+</div>
+
+<section class="section-pad" id="contact">
+  <div class="container contact-grid">
+    <div class="reveal">
+      <div class="eyebrow">Get In Touch</div>
+      <h2 style="font-size:32px;margin-bottom:28px;">Request a site assessment</h2>
+      <div class="contact-info-item">
+        <div class="eyebrow" style="margin-bottom:4px;">Phone</div>
+        <p>+91 77809 78023</p>
+        <span>Mon–Sat, 9:30 AM – 6:30 PM IST</span>
+      </div>
+      <div class="contact-info-item">
+        <div class="eyebrow" style="margin-bottom:4px;">Email</div>
+        <p>support@prithyarthtechnologies.com</p>
+        <span>Response within one business day</span>
+      </div>
+      <div class="contact-info-item">
+        <div class="eyebrow" style="margin-bottom:4px;">Office</div>
+        <p>Jammu, Jammu &amp; Kashmir, India</p>
+        <span>On-site visits across Jammu &amp; Kashmir and PAN India by arrangement</span>
+      </div>
+    </div>
+    <form class="reveal" action="https://formsubmit.co/support@prithyarthtechnologies.com" method="POST">
+      <input type="hidden" name="_subject" value="New enquiry — Prithyarth Technologies website">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_template" value="table">
+      <input type="text" name="_honey" style="display:none">
+      <div class="form-row">
+        <div>
+          <label for="fname">Full Name</label>
+          <input id="fname" name="Full Name" type="text" placeholder="Your name" required>
+        </div>
+        <div>
+          <label for="company">Company</label>
+          <input id="company" name="Company" type="text" placeholder="Company name">
+        </div>
+      </div>
+      <div class="form-row">
+        <div>
+          <label for="phone">Phone</label>
+          <input id="phone" name="Phone" type="tel" placeholder="+91" required>
+        </div>
+        <div>
+          <label for="email">Email</label>
+          <input id="email" name="Email" type="email" placeholder="you@company.com" required>
+        </div>
+      </div>
+      <div>
+        <label for="service">Service Required</label>
+        <select id="service" name="Service Required">
+          <option>Networking</option>
+          <option>Hardware Supply</option>
+          <option>Structured Cabling</option>
+          <option>Data Center &amp; Cloud</option>
+          <option>Surveillance &amp; Security</option>
+          <option>AMC &amp; Support</option>
+          <option>Something else</option>
+        </select>
+      </div>
+      <div>
+        <label for="msg">Project Details</label>
+        <textarea id="msg" name="Project Details" placeholder="Tell us about your site, timeline, and requirements"></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary" style="justify-content:center;">Send Request</button>
+      <p style="color:var(--text-faint);font-size:12.5px;">Submissions are emailed directly to support@prithyarthtechnologies.com.</p>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <div class="logo" style="margin-bottom:14px;">
+          <div class="logo-mark">PT</div>
+          <div>Prithyarth Technologies</div>
+        </div>
+        <p style="font-size:13.5px;color:var(--text-dim);max-width:280px;">End-to-end IT equipment and services — networking to hardware — for businesses that need infrastructure they can rely on.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Services</h5>
+        <a href="#services">Networking</a>
+        <a href="#services">Hardware Supply</a>
+        <a href="#services">Structured Cabling</a>
+        <a href="#services">Data Center &amp; Cloud</a>
+      </div>
+      <div class="footer-col">
+        <h5>Company</h5>
+        <a href="#why">Why Us</a>
+        <a href="#process">Our Process</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h5>Contact</h5>
+        <a href="tel:+917780978023">+91 77809 78023</a>
+        <a href="mailto:support@prithyarthtechnologies.com">support@prithyarthtechnologies.com</a>
+        <a href="#">Jammu, J&amp;K, India</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Prithyarth Technologies. All rights reserved.</span>
+      <span>Built for networking to hardware.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  navToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); } });
+  }, {threshold:0.15});
+  revealEls.forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
